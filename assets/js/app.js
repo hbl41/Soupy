@@ -59,7 +59,7 @@ const App = (() => {
     // Threat + panels
     const assessment = assessThreat(data);
     renderThreat(assessment);
-    renderFireList(inc.data, perim.data);
+    renderFireList(inc.data, perim.data, data.results);
     renderWeather(wx.data);
     renderSourceStatus(data.results, firms);
 
@@ -101,39 +101,78 @@ const App = (() => {
       `<span>${a.counts.recentHotspots} fresh (&lt;36h)</span>`;
   }
 
-  function renderFireList(incidents, perims) {
+  function renderFireList(incidents, perims, results) {
     const el = document.getElementById("fire-list");
-    if (!incidents.length && !perims.length) {
+    const incFailed = results && results.inc && !results.inc.ok;
+    const perimFailed = results && results.perim && !results.perim.ok;
+    const norm = (s) => String(s || "").trim().toLowerCase();
+
+    // Combine incident points and fire perimeters into one ranked list so the
+    // panel is never blank just because one of the two NIFC feeds came back
+    // empty. Perimeters are only added when they don't duplicate an incident.
+    const rows = [];
+    const seen = new Set();
+    incidents.forEach((f) => {
+      seen.add(norm(f.name));
+      rows.push({
+        name: f.name, dist: f.distanceMi, bearing: f.bearing,
+        acres: f.acres, contained: f.contained, county: f.county,
+        cause: f.cause, kind: "incident",
+      });
+    });
+    perims.forEach((p) => {
+      if (seen.has(norm(p.name))) return;
+      rows.push({
+        name: p.name, dist: p.edgeDistanceMi, bearing: null,
+        acres: p.acres, contained: p.contained, kind: "perimeter",
+      });
+    });
+    rows.sort((a, b) => a.dist - b.dist);
+
+    if (!rows.length) {
       el.innerHTML =
-        '<p class="muted">No active wildfire incidents reported within ' +
-        CONFIG.searchRadiusMiles +
-        " miles of the cabin.</p>";
+        incFailed && perimFailed
+          ? '<p class="muted">⚠ Couldn\'t reach the NIFC fire feeds right now — will retry on the next update. See <b>Sources</b> below for the error.</p>'
+          : '<p class="muted">✅ No active wildfire incidents within ' +
+            CONFIG.searchRadiusMiles +
+            " miles of the cabin right now.</p>";
       return;
     }
-    // Merge perimeter containment/acres into incidents by name where possible.
-    const rows = incidents
-      .slice(0, 20)
+
+    let html = rows
+      .slice(0, 25)
       .map((f) => {
-        const lvl = levelForDistance(f.distanceMi) || "WATCH";
+        const lvl = levelForDistance(f.dist) || "WATCH";
         const c = THREAT_LEVELS[lvl].color;
+        const dir = f.bearing != null ? " " + compass(f.bearing) : "";
         return `
         <div class="fire-row" style="border-left-color:${c}">
           <div class="fire-row-head">
-            <span class="fire-name">${escapeHtml(f.name)}</span>
+            <span class="fire-name">${escapeHtml(f.name)}${
+          f.kind === "perimeter" ? ' <span class="tag">perimeter</span>' : ""
+        }</span>
             <span class="fire-dist" style="color:${c}">${fmtMiles(
-          f.distanceMi
-        )} ${compass(f.bearing)}</span>
+          f.dist
+        )}${dir}</span>
           </div>
           <div class="fire-row-meta">
             ${fmtAcres(f.acres)}
-            ${f.contained != null ? "· " + f.contained + "% contained" : ""}
+            ${
+              f.contained != null && f.contained !== ""
+                ? "· " + f.contained + "% contained"
+                : ""
+            }
             ${f.county ? "· " + escapeHtml(f.county) + " Co." : ""}
             ${f.cause ? "· " + escapeHtml(f.cause) : ""}
           </div>
         </div>`;
       })
       .join("");
-    el.innerHTML = rows;
+    if (incFailed || perimFailed)
+      html =
+        '<p class="muted small">⚠ One NIFC feed failed to load; showing what came through.</p>' +
+        html;
+    el.innerHTML = html;
   }
 
   function renderWeather(wx) {
@@ -187,14 +226,19 @@ const App = (() => {
         const ok = it.r.ok;
         const needsKey = it.r.needsKey;
         const dot = ok ? "ok" : needsKey ? "warn" : "err";
+        const count = it.r.data && it.r.data.length != null ? it.r.data.length : "";
         const note = ok
-          ? `${it.r.data.length != null ? it.r.data.length : ""}`
+          ? (count === "" ? "ok" : count + " found")
           : needsKey
           ? "needs key"
           : "offline";
+        const err =
+          !ok && !needsKey && it.r.error
+            ? `<div class="src-err">${escapeHtml(it.r.error)}</div>`
+            : "";
         return `<div class="src"><span class="dot ${dot}"></span>${escapeHtml(
           it.name
-        )} <span class="src-note">${escapeHtml(String(note))}</span></div>`;
+        )} <span class="src-note">${escapeHtml(String(note))}</span></div>${err}`;
       })
       .join("");
 

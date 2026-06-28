@@ -25,11 +25,10 @@ async function fetchIncidents() {
       geometryType: "esriGeometryEnvelope",
       inSR: "4326",
       spatialRel: "esriSpatialRelIntersects",
-      outFields: [
-        "IncidentName", "FireDiscoveryDateTime", "DailyAcres",
-        "PercentContained", "IncidentTypeCategory", "POOState",
-        "POOCounty", "FireCause", "IncidentShortDescription",
-      ].join(","),
+      // Request all fields: WFIGS occasionally renames columns, and asking
+      // for a since-renamed field would 400 the whole query (blanking the
+      // list). Reading defensively below is cheaper than guessing names.
+      outFields: "*",
       returnGeometry: "true",
       outSR: "4326",
       f: "json",
@@ -45,10 +44,10 @@ async function fetchIncidents() {
         );
         return {
           id: "nifc:" + (a.IncidentName || g.x + "," + g.y),
-          name: a.IncidentName || "Unnamed incident",
+          name: a.IncidentName || a.IncidentName2 || "Unnamed incident",
           lat: g.y,
           lon: g.x,
-          acres: a.DailyAcres,
+          acres: a.DailyAcres ?? a.IncidentSize ?? a.GISAcres,
           contained: a.PercentContained,
           type: a.IncidentTypeCategory,
           county: a.POOCounty,
@@ -90,8 +89,7 @@ async function fetchPerimeters() {
       geometryType: "esriGeometryEnvelope",
       inSR: "4326",
       spatialRel: "esriSpatialRelIntersects",
-      outFields:
-        "poly_IncidentName,attr_IncidentName,poly_GISAcres,attr_PercentContained",
+      outFields: "*",
       returnGeometry: "true",
       outSR: "4326",
       f: "geojson",
@@ -113,9 +111,13 @@ async function fetchPerimeters() {
         );
         return {
           id: "perim:" + (p.poly_IncidentName || p.attr_IncidentName || Math.random()),
-          name: p.poly_IncidentName || p.attr_IncidentName || "Fire perimeter",
-          acres: p.poly_GISAcres,
-          contained: p.attr_PercentContained,
+          name:
+            p.poly_IncidentName ||
+            p.attr_IncidentName ||
+            p.IncidentName ||
+            "Fire perimeter",
+          acres: p.poly_GISAcres ?? p.poly_Acres ?? p.GISAcres ?? p.attr_IncidentSize,
+          contained: p.attr_PercentContained ?? p.PercentContained,
           geojson: f,
           edgeDistanceMi: dist,
           source: "NIFC",
