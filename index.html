@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ouray / Placerville Wildfire Tracker</title>
+    <meta
+      name="description"
+      content="Live wildfire tracker for the cabin at 137 Bristol Rd, Placerville, CO — distance, direction, and threat level from multiple fire sources."
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🔥</span>
+        <div>
+          <h1>Placerville Wildfire Watch</h1>
+          <p class="subtitle">
+            Tracking fires near the cabin · Ouray &amp; San Miguel County, CO
+          </p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span id="status" class="status">Starting…</span>
+        <span id="countdown" class="countdown"></span>
+        <button id="refresh-btn" class="btn" title="Refresh now">
+          ↻ Refresh
+        </button>
+        <button id="settings-btn" class="btn btn-ghost" title="Settings">
+          ⚙ Settings
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- Left: dashboard -->
+      <section class="panel">
+        <div id="threat-banner" class="threat-banner">
+          <div class="threat-main">
+            <div class="threat-level">…</div>
+            <div class="threat-blurb">Assessing…</div>
+          </div>
+          <div id="threat-distance" class="threat-distance"></div>
+        </div>
+
+        <div class="card">
+          <h2>Why this level</h2>
+          <ul id="threat-reasons" class="reasons"></ul>
+          <div id="threat-counts" class="counts"></div>
+        </div>
+
+        <div class="card">
+          <h2>Fire weather</h2>
+          <div id="weather-panel"></div>
+        </div>
+
+        <div class="card">
+          <h2>Nearby fires (closest first)</h2>
+          <div id="fire-list"><p class="muted">Loading…</p></div>
+        </div>
+
+        <div class="card">
+          <h2>Sources</h2>
+          <div id="source-status" class="source-status"></div>
+          <div class="map-legend">
+            <span><i class="sw" style="background:#ff0000"></i>hotspot &lt;12h</span>
+            <span><i class="sw" style="background:#ff9500"></i>1–2 days</span>
+            <span><i class="sw" style="background:#ffd000"></i>3–4 days</span>
+            <span><i class="sw perim"></i>fire perimeter</span>
+          </div>
+          <div id="ref-links" class="ref-links"></div>
+        </div>
+
+        <p class="disclaimer">
+          Informational only. In an emergency follow official orders from
+          San&nbsp;Miguel / Ouray County, the Sheriff, and InciWeb. Satellite
+          hotspots can be false positives; absence of data is not proof of
+          safety.
+        </p>
+      </section>
+
+      <!-- Right: map -->
+      <section class="map-wrap">
+        <div id="map"></div>
+      </section>
+    </main>
+
+    <!-- Settings dialog -->
+    <dialog id="settings" class="settings-dialog">
+      <form method="dialog" class="settings-form">
+        <h2>Settings</h2>
+
+        <label>
+          NASA FIRMS MAP_KEY
+          <input id="set-firms" type="text" placeholder="paste free key" />
+          <small
+            >Get a free key at
+            <a
+              href="https://firms.modaps.eosdis.nasa.gov/api/area/"
+              target="_blank"
+              rel="noopener"
+              >firms.modaps.eosdis.nasa.gov/api/area ↗</a
+            >. Enables live satellite hotspots.</small
+          >
+        </label>
+
+        <div class="grid2">
+          <label>
+            Cabin latitude
+            <input id="set-lat" type="number" step="0.00001" />
+          </label>
+          <label>
+            Cabin longitude
+            <input id="set-lon" type="number" step="0.00001" />
+          </label>
+        </div>
+        <small class="hint">Tip: you can also just drag the 🏠 pin on the map.</small>
+
+        <div class="grid2">
+          <label>
+            Refresh every (min)
+            <input id="set-refresh" type="number" min="1" max="60" />
+          </label>
+          <label>
+            Hotspot days
+            <input id="set-days" type="number" min="1" max="7" />
+          </label>
+        </div>
+        <label>
+          Search radius (mi)
+          <input id="set-radius" type="number" min="5" max="300" />
+        </label>
+
+        <div class="settings-actions">
+          <button id="settings-save" class="btn">Save</button>
+          <button id="settings-close" class="btn btn-ghost" value="cancel">
+            Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin=""
+    ></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/sources.js"></script>
+    <script src="assets/js/threat.js"></script>
+    <script src="assets/js/map.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
