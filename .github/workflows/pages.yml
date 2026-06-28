@@ -1,0 +1,45 @@
+name: Deploy wildfire tracker to GitHub Pages
+
+# Publishes the static site (repo root) to GitHub Pages. The first run also
+# enables Pages automatically (enablement: true), so no manual setting needed.
+
+on:
+  push:
+    branches: ["claude/ouray-wildfire-tracker-hd0jff"]
+  workflow_dispatch: {}
+
+# Allow the workflow to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One concurrent deployment; don't cancel an in-progress publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages (auto-enable on first run)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The whole repo root is the site (index.html + assets/).
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
