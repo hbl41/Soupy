@@ -25,7 +25,7 @@ proj = srs_true + lebron_net + brown_net + embiid_net
 print(f"   SRS-true baseline {srs_true:.0f} + LeBron {lebron_net:+.0f} + Brown-for-George full yr {brown_net:+.0f}"
       f" + Embiid games {embiid_net:+.0f} = {proj:.0f} wins")
 print(f"   (LeBron 2025-26 wins-over-replacement: VORP 2.8 x 2.7 = {lebron_wor:.1f} in 60 GP)")
-print(f"   market cross-check: FanDuel post-signing win total 50.5 | video: 51")
+print(f"   market cross-check: FanDuel post-signing win total 50.5")
 
 print("=" * 70)
 print("3) MAXEY — unassisted share of FGM")
@@ -34,7 +34,7 @@ d = arrival_deltas()
 guards = [d['Kyrie Irving (guard)'], d['Mo Williams (guard)'], d["D'Angelo Russell (guard)"]]
 g = sum(guards) / len(guards)
 print(f"   2025-26: unassisted {1-mx:.1%} (694 FGM) | league {1-LEAGUE['assisted_share']:.1%}")
-print(f"   projected: {1-(mx+g):.1%}  [guard-arrival mean {g:+.1%}; range {1-(mx+max(guards)):.1%}..{1-(mx+min(guards)):.1%}] | video: 45%")
+print(f"   projected: {1-(mx+g):.1%}  [guard-arrival mean {g:+.1%}; range {1-(mx+max(guards)):.1%}..{1-(mx+min(guards)):.1%}]")
 
 print("=" * 70)
 print("4) BROWN — assisted share of FGM")
@@ -42,7 +42,7 @@ b26, b24 = assisted_share(BROWN_2526), assisted_share(BROWN_2324)
 allm = sum(d.values()) / len(d)
 br = b24 + allm / 2
 print(f"   2025-26 (Tatum hurt, USG 36.2): {b26:.1%} | 2023-24 (healthy co-star, USG 28.9): {b24:.1%}")
-print(f"   projected: {br:.1%}  [restore {b24:.1%} + half arrival-mean {allm/2:+.1%}] | video: 48%")
+print(f"   projected: {br:.1%}  [restore {b24:.1%} + half arrival-mean {allm/2:+.1%}]")
 
 print("=" * 70)
 print("5) EMBIID — at-rim share of FGM")
@@ -53,7 +53,7 @@ def embiid_proj(s, r):   # s = share of Embiid FGM assisted by LeBron; r = rim r
 lo, mid, hi = embiid_proj(.20, .55), embiid_proj(.25, .60), embiid_proj(.30, .65)
 print(f"   2025-26: {e0:.1%} (119/341) | LeBron assist profile: {LEBRON_RIM_AST:.1%} at rim (all targets; bigs higher)")
 print(f"   projected: {mid:.1%}  [s=25% of makes LeBron-assisted, rim rate 60% for a big target; range {lo:.1%}..{hi:.1%}]")
-print(f"   video: 37% -> 42% (its 37% baseline & '52% of 765 assists' both unsupported; real: 34.9%, 42.1% of 432)")
+
 
 print("=" * 70)
 print("6) EDGECOMBE — corner-3 share of FGM")
@@ -63,7 +63,7 @@ def edge_proj(s):
     return (1 - s) * c0 + s * LEBRON_C3_AST
 print(f"   2025-26: {c0:.1%} (25/451, pbpstats; BBRef-derived ~4.4%) | LeBron corner-3 assist share {LEBRON_C3_AST:.1%}")
 print(f"   projected: {edge_proj(.22):.1%}  [22% of makes LeBron-assisted; range {edge_proj(.15):.1%}..{edge_proj(.30):.1%}]")
-print(f"   video: 8% -> 12% (neither supported by shot data)")
+
 
 print("=" * 70)
 print("7) LEBRON — usage & TS")
@@ -76,7 +76,7 @@ age_drag = 1.0
 ts1 = ts0 + (ts_gain - age_drag) / 100
 print(f"   usage {u0:.1%} (career low; rookie low was 28.2%) -> {u1:.1%}  [star-arrival shed {shed:.1f} pts]")
 print(f"   TS {ts0:.3f} -> {ts1:.3f}  [+0.4/usage-pt skill curve - 1.0 age drag]  range .60-.63")
-print(f"   career-best TS .649 (2013-14); career .590 | video: 22% usage, .627 TS")
+print(f"   career-best TS .649 (2013-14); career .590")
 
 print("=" * 70)
 print("8) THE HEIST, QUANTIFIED")

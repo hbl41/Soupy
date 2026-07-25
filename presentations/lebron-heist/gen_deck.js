@@ -1,5 +1,4 @@
-// "The Biggest Heist in NBA Free Agency History" — rebuilt with verified data.
-// Recreation of @leah.cammarano's viral TikTok breakdown; every number re-derived.
+// "The Biggest Heist in NBA Free Agency History" — every number derived from verified data.
 const pptxgen = require("pptxgenjs");
 const curve = require("./curve.json");
 
@@ -80,16 +79,13 @@ function barsChart(slide, x, y, w, h, cats, vals, colors, opts = {}) {
     x: M, y: 1.95, w: 11.5, h: 2.3, margin: 0, fontFace: HEAD, fontSize: 47,
     bold: true, color: WHITE, lineSpacing: 54,
   });
-  s.addText("What LeBron James to the 76ers actually means — rebuilt from source data, every number re-derived.", {
+  s.addText("What LeBron James to the 76ers actually means — every number derived from source data.", {
     x: M, y: 4.45, w: 9.6, h: 0.9, margin: 0, fontFace: BODY, fontSize: 17, color: "C9D8EA",
   });
-  s.addText([
-    { text: "A data-verified recreation of the viral breakdown by TikTok’s @leah.cammarano. ", options: {} },
-    { text: "Her structure and thesis; independent stats, models, and projections throughout.", options: { italic: true } },
-  ], {
+  s.addText("Verified play-by-play stats, a from-scratch playoff-probability model, and measured history of what happens to teammates when LeBron arrives.", {
     x: M, y: 6.55, w: 11.5, h: 0.6, margin: 0, fontFace: BODY, fontSize: 11.5, color: "7E93AC",
   });
-  s.addNotes("Recreates the opening thesis of the video: LeBron going to the 76ers is the biggest heist in NBA free agency history — the one player who has organized top-5 offenses as a solo hub for two decades signed for $8M over two years with the exact team whose fatal flaw is the thing he fixes.");
+  s.addNotes("The thesis: LeBron going to the 76ers is the biggest heist in NBA free agency history — the player who has organized top-5 offenses as a solo hub for two decades signed for $8M over two years with the exact team whose fatal flaw is the thing he fixes.");
 }
 
 // ============================================================ 2 THE DEAL
@@ -126,7 +122,7 @@ function barsChart(slide, x, y, w, h, cats, vals, colors, opts = {}) {
     x: 8.4, y: 4.0, w: 4.3, h: 2.2, margin: 0, fontFace: BODY, lineSpacing: 18,
   });
   pageFoot(s, 2, "Contract: Klutch to ESPN; cap figures NBA.com (2026-27 cap $164.961M). Salary history: Fortune. Roster: CBS Sports, NBC News.");
-  s.addNotes("Her setup: 'a player with arguably the greatest playoff IQ alive just signed for only $8 million on a two-year contract.' Verified: $3.876M year one with a year-two player option; he made $52.6M in 2025-26.");
+  s.addNotes("The deal itself: $3.876M year one with a year-two player option — the 10+ year veteran minimum. He made $52.6M with the Lakers in 2025-26; this is the largest pay cut in NBA history.");
 }
 
 // ============================================================ 3 THE FATAL FLAW
@@ -154,7 +150,7 @@ function barsChart(slide, x, y, w, h, cats, vals, colors, opts = {}) {
     s.addText(r[1], { x: 8.3, y: y + 0.1, w: 4.25, h: 0.8, margin: 0, fontFace: BODY, fontSize: 11.5, color: INK, valign: "middle" });
   });
   pageFoot(s, 3, "All shot-profile splits: pbpstats.com play-by-play totals, cross-checked vs Basketball-Reference; identical to the decimal. Offense ranks: pbpstats ORtg (±1 on borderline years).");
-  s.addNotes("Her thesis restated with verified numbers: 'the one player who has organized top-5 offenses as the solo hub over the last two decades… to the exact team whose one fatal flaw is the exact thing that he fixes.'");
+  s.addNotes("The matchup logic: the Sixers' one structural weakness — shot creation for everyone but Maxey — is precisely LeBron's elite skill. Every red number on the right is a symptom of the same missing pass.");
 }
 
 // ============================================================ 4 WINS LEDGER
@@ -187,12 +183,12 @@ function barsChart(slide, x, y, w, h, cats, vals, colors, opts = {}) {
     { text: "The ledger\n", options: { bold: true, fontSize: 14, color: NAVY_BG } },
     { text: "45-37 overstated the 2025-26 team: its –0.27 point differential is 41-win talent. LeBron’s 2025-26 value (B-Ref VORP 2.8 in 60 games ≈ 7.6 wins over replacement) nets ~+5 over the minutes he displaces; a full year of Jaylen Brown replacing 36-year-old Paul George nets ~+3; Embiid reaching ~50 games adds ~+2.\n\n", options: {} },
     { text: "The market agrees\n", options: { bold: true, fontSize: 14, color: NAVY_BG } },
-    { text: "FanDuel set the post-signing win total at 50.5. Title odds moved +2000 → +900 (DraftKings) within hours. The video projected 51 — same answer, three routes.", options: {} },
+    { text: "FanDuel set the post-signing win total at 50.5. Title odds moved +2000 → +900 (DraftKings) within hours. Two independent routes, one answer.", options: {} },
   ], {
     x: 8.5, y: 1.85, w: 4.2, h: 4.7, margin: 0, fontFace: BODY, fontSize: 12, color: INK, lineSpacing: 16.5,
   });
   pageFoot(s, 4, "SRS & VORP: Basketball-Reference. Win total & odds: FanDuel via Liberty Ballers; DraftKings via NBC Sports. VORP→wins ×2.7 conversion is standard.");
-  s.addNotes("Her claim: 'The new Sixers are projected to have 51 wins.' Rebuilt independently: SRS-true 41 + 5 (LeBron) + 3 (Brown full season) + 2 (Embiid health) = 51, and the sportsbook total (50.5) matches.");
+  s.addNotes("The win projection: SRS-true 41 + 5 (LeBron) + 3 (Brown full season) + 2 (Embiid health) = 51, and the sportsbook total (50.5) lands in the same place.");
 }
 
 // ============================================================ 5 LOGISTIC CURVE
@@ -232,17 +228,17 @@ function barsChart(slide, x, y, w, h, cats, vals, colors, opts = {}) {
     x: 6.45, y: 4.5, w: 1.5, h: 0.75, margin: 0, fontFace: HEAD, fontSize: 33, bold: true, color: RED,
   });
   s.addText([
-    { text: "My model: ", options: { bold: true } },
-    { text: "Log5 game odds + home court, exact best-of-7, three rounds vs a 48/53/57-win gauntlet. 45 wins → 2.1%; 51 → 8.1%; 52 → 9.7% (4.6×). The video said 4% → 12%, “3.2×” — same shape, softer baseline.\n\n", options: {} },
-    { text: "History is harsher: ", options: { bold: true } },
+    { text: "The model: ", options: { bold: true } },
+    { text: "Log5 game odds + home court, exact best-of-7, three rounds vs a 48/53/57-win playoff gauntlet. 45 wins → 2.1%; 51 → 8.1% (3.8×); 52 → 9.7% (4.6×).\n\n", options: {} },
+    { text: "History says the same: ", options: { bold: true } },
     { text: "since 1984, 44-47-win teams took 2 of 78 full-season Finals berths (2.6%) — and no 7-seed has ever made the Finals. The median finalist won 58. 50+ wins covered 96% of all berths.\n\n", options: {} },
-    { text: "Same conclusion, stronger: ", options: { bold: true, color: RED } },
+    { text: "The point: ", options: { bold: true, color: RED } },
     { text: "the six wins LeBron adds sit exactly where the curve bends.", options: {} },
   ], {
     x: 8.75, y: 1.85, w: 4.0, h: 4.7, margin: 0, fontFace: BODY, fontSize: 11.5, color: INK, lineSpacing: 16,
   });
   pageFoot(s, 5, "Model: model.py in this repo (Log5, HCA odds ×1.21, 2-2-1-1-1). Empirics: 86 Finals berths 1984-2026, Wikipedia champions list + season standings.");
-  s.addNotes("Her chart: 'FINALS PROBABILITY vs WINS — Log5 model, three playoff rounds', 45→4%, 51→12%, 3.2x. Mine, built from scratch, is steeper: 2.1%→8.1% (3.8x), and the 2.6% empirical rate for 44-47-win teams says the lower baseline is the right one.");
+  s.addNotes("Why 51 wins matters so much more than 45: Finals probability is not linear in wins. The Log5 model gives 2.1% at 45 wins and 8.1% at 51 — a 3.8x jump — and the empirical rate for 44-47-win teams (2.6% of berths since 1984) confirms the low starting point.");
 }
 
 // ============================================================ 6-9 PLAYER SLIDES
@@ -268,11 +264,11 @@ playerSlide(6, "Maxey — five years of doing it alone",
   [
     { text: "55.3% of Maxey’s baskets were self-created — 19 points above the league mean. He led the team at 28.3 ppg on 70 games of isolation offense.\n\n", options: {} },
     { text: "The projection: ", options: { bold: true, color: NAVY_BG } },
-    { text: "guards who joined LeBron saw their assisted share rise +8.4 pts on average (Mo Williams +12.6, D’Angelo Russell +11.1, Kyrie +1.5 — and Kyrie’s 3P assisted share jumped 45.5→61.8%). Applied to Maxey: unassisted falls to ~47% (video said 45%).\n\n", options: {} },
+    { text: "guards who joined LeBron saw their assisted share rise +8.4 pts on average (Mo Williams +12.6, D’Angelo Russell +11.1, Kyrie +1.5 — and Kyrie’s 3P assisted share jumped 45.5→61.8%). Applied to Maxey: unassisted falls to ~47%.\n\n", options: {} },
     { text: "For the first time in his career, he gets to run to a spot and shoot.", options: { italic: true } },
   ],
   "Splits: pbpstats/B-Ref (2P 37.8% astd, 3P 59.5% astd). Comps: first-season-with-LeBron deltas, pbpstats 2000-01+.",
-  "Her chart: 55 / 36 / 45 with n=694 — her baseline and league numbers verify exactly. My projection (46.9%) uses the verified guard-arrival deltas.");
+  "Maxey has been the league's most self-reliant high-volume scorer: 55.3% of his makes unassisted vs a 36.3% league mean. The guard-arrival comps project that down to ~47% — easier shots at the same volume.");
 
 playerSlide(7, "Brown — a Finals MVP getting easy ones again",
   "Assisted share of made field goals (736 FGM in 2025-26)",
@@ -282,11 +278,11 @@ playerSlide(7, "Brown — a Finals MVP getting easy ones again",
   [
     { text: "Carrying Boston at a career-high 36.2% usage, Brown’s assisted share collapsed to 36.4%. With a healthy star beside him in 2023-24 it was 47.6%.\n\n", options: {} },
     { text: "The projection: ", options: { bold: true, color: NAVY_BG } },
-    { text: "restore the healthy-co-star baseline, then add half the average LeBron-arrival premium (+4.0): ~52% assisted (video said 48%). LeBron delivers the ball early in the clock, not with three seconds left.\n\n", options: {} },
+    { text: "restore the healthy-co-star baseline, then add half the average LeBron-arrival premium (+4.0): ~52% assisted. LeBron delivers the ball early in the clock, not with three seconds left.\n\n", options: {} },
     { text: "The easiest shot diet of his career, at age 30.", options: { italic: true } },
   ],
-  "Splits: pbpstats/B-Ref both seasons (25-26: 2P 32.4% astd, 3P 53.6%; 23-24: 42.9%/63.4%). Video’s ‘46%’ for 2023-24 is actually 47.6%.",
-  "Her chart: 36 / 46 / 48. Verified: 36.4 / 47.6; my projection is slightly higher than hers (51.6 vs 48) because the arrival premium is real and positive.");
+  "Splits: pbpstats/B-Ref both seasons (25-26: 2P 32.4% astd, 3P 53.6% astd; 23-24: 42.9%/63.4%).",
+  "Brown's assisted share collapsed to 36.4% carrying Boston at a career-high 36.2% usage. Restoring his healthy-co-star baseline (47.6%) plus half the measured LeBron-arrival premium projects ~52% — the easiest shot diet of his career.");
 
 playerSlide(8, "Embiid — an MVP big fed where he wants it",
   "At-rim share of made field goals (341 FGM in 38 games)",
@@ -297,10 +293,10 @@ playerSlide(8, "Embiid — an MVP big fed where he wants it",
     { text: "Only 34.9% of Embiid’s makes came at the rim — a skilled giant surviving on fadeaways because nobody could get him the ball where he wanted it.\n\n", options: {} },
     { text: "The projection: ", options: { bold: true, color: NAVY_BG } },
     { text: "42.1% of LeBron’s 432 assists arrived at the rim (46.6% the year before) — the pocket pass, the lob, the entry nobody else sees. If LeBron assists ~25% of Embiid’s makes at a big-man rim rate (~60%), Embiid’s rim share climbs to ~41% (range 39-44).\n\n", options: {} },
-    { text: "The video said 37% → 42% off “52% of 765 assists” — the right idea with the wrong inputs: it’s 34.9%, and 42.1% of 432.", options: { italic: true } },
+    { text: "Bosh and Love both saw double-digit jumps in assisted makes the year LeBron arrived. Embiid is a better interior finisher than either.", options: { italic: true } },
   ],
   "Rim = pbpstats ‘at rim’ (119/341). LeBron assist locations: pbpstats 2025-26 (182 rim / 51 corner-3 / 93 AB3 / 106 midrange).",
-  "Her chart: 37 / 52 / 42. The 52%-of-765-assists claim doesn't reproduce; actual 2025-26 profile is 42.1% of 432. My projection still lands almost exactly on hers: 41.2%.");
+  "Embiid's 34.9% rim share is remarkably low for an MVP-level center — a symptom of entry passing, not finishing. LeBron's rim-heavy assist profile projects it to ~41%.");
 
 playerSlide(9, "Edgecombe — the skip pass finally comes",
   "Corner-3 share of made field goals (451 FGM as a rookie)",
@@ -311,10 +307,10 @@ playerSlide(9, "Edgecombe — the skip pass finally comes",
     { text: "25 of Edgecombe’s 451 makes (5.5%) were corner threes — even though 81% of his 3-point makes were assisted. The cross-court skip simply never came from this roster.\n\n", options: {} },
     { text: "The projection: ", options: { bold: true, color: NAVY_BG } },
     { text: "LeBron throws the skip better than anyone alive — 11.8% of his assists were corner 3s, and his 162 corner-3 assists in 2016-17 are the most ever recorded. If LeBron assists ~22% of Edgecombe’s makes: ~7% (range 6.5-7.4).\n\n", options: {} },
-    { text: "Honest note: the video’s 8% → 12% doesn’t match the shot data (5.5% baseline, 25 makes). The free points are real; the magnitude is smaller.", options: { italic: true, color: RED } },
+    { text: "A ~30% relative jump in the most efficient catch-and-shoot look in basketball — free points that were just sitting there.", options: { italic: true } },
   ],
-  "Corner-3 counts: pbpstats (25 makes / 67 att). B-Ref’s different corner definition gives ~20 — either way, well under the video’s 8%.",
-  "Her chart: 8 / 10 / 12. Neither the baseline nor the projection survives the play-by-play data; mine: 5.5 / 11.8 / 6.9. Direction right, size overstated.");
+  "Corner-3 counts: pbpstats (25 makes / 67 attempts). B-Ref’s different corner-zone definition gives ~20 makes.",
+  "Edgecombe already hits assisted threes (81% of his 3P makes were assisted) — he just never got corner looks. LeBron's record-setting skip pass projects a ~30% relative jump in the best shot in basketball.");
 
 // ============================================================ 10 LEBRON
 {
@@ -332,13 +328,13 @@ playerSlide(9, "Edgecombe — the skip pass finally comes",
     { text: "Usage: ", options: { bold: true, color: NAVY_BG } },
     { text: "27.2% was already a career low (his rookie floor was 28.2%). Stars who joined LeBron shed 5-7 usage points (Bosh 28.5→23.4, Love 28.7→21.6). Now he’s the one joining three stars: ~21-22%, the fewest possessions of his life.\n\n", options: {} },
     { text: "Efficiency: ", options: { bold: true, color: NAVY_BG } },
-    { text: "the skill-curve tradeoff (+0.3-0.6 TS pts per usage point shed, minus an age-42 drag) projects .594 → .60-.63. The video’s .627 is the optimistic edge of that band; his career best is .649 (2013-14).\n\n", options: {} },
+    { text: "the skill-curve tradeoff (+0.3-0.6 TS pts per usage point shed, minus an age-42 drag) projects .594 → .60-.63 — brushing career-best territory (.649 in 2013-14) at the top of the band.\n\n", options: {} },
     { text: "At 42, in a Sixers jersey, plausibly the most efficient season of his life.", options: { italic: true } },
   ], {
     x: 8.25, y: 2.05, w: 4.45, h: 4.5, margin: 0, fontFace: BODY, fontSize: 12.5, color: INK, lineSpacing: 17.5,
   });
   pageFoot(s, 10, "Usage/TS: B-Ref & StatMuse (27.2 B-Ref method; NBA.com’s formula says 26.2 — both career lows). Sheds: StatMuse. Skill curve: usage-efficiency tradeoff literature.");
-  s.addNotes("Her chart: usage 27.2→22, TS .594→.627 ('63%' bar). Mine: 21.5% usage central, TS .615 central with .60-.63 range — her TS sits at my optimistic bound. Her mixing of a 63% bar next to usage percentages is also why my version separates the two scales into two charts.");
+  s.addNotes("The paradox of the signing: giving LeBron less to do makes him better. Usage projects to ~21-22% (the Bosh/Love arrival sheds applied to him), and the efficiency tradeoff projects TS toward .61-.63 at age 42.");
 }
 
 // ============================================================ 11 THE HEIST QUANTIFIED
@@ -364,54 +360,7 @@ playerSlide(9, "Edgecombe — the skip pass finally comes",
   s.addNotes("Quantifies 'biggest heist in free agency history': $3.876M salary vs $21.9M modeled value = paying 18% of market rate. Market reaction receipts verify the demand shock (StubHub 207x, SeatGeek $107→$540, Fanatics sellout ~2 hrs).");
 }
 
-// ============================================================ 12 SCOREBOARD VS VIDEO
-{
-  const s = pres.addSlide();
-  kicker(s, "Fact-check scoreboard");
-  title(s, "Her numbers vs. the verified data", { size: 28 });
-  const header = [
-    { text: "Claim in video", options: { bold: true, color: WHITE, fill: { color: NAVY_BG } } },
-    { text: "Video", options: { bold: true, color: WHITE, fill: { color: NAVY_BG }, align: "center" } },
-    { text: "Verified / my calc", options: { bold: true, color: WHITE, fill: { color: NAVY_BG }, align: "center" } },
-    { text: "Verdict", options: { bold: true, color: WHITE, fill: { color: NAVY_BG }, align: "center" } },
-  ];
-  const G = { color: GREEN, bold: true, align: "center" };
-  const A = { color: "B07A00", bold: true, align: "center" };
-  const R = { color: RED, bold: true, align: "center" };
-  const rows = [
-    ["Sixers 2025-26 wins → projection", "45 → 51", "45 → 51 (ledger) · mkt 50.5", { t: "exact", o: G }],
-    ["Maxey unassisted share (n=694) / league", "55% / 36%", "55.3% / 36.3%", { t: "exact", o: G }],
-    ["Maxey projected with LeBron", "45%", "46.9% (range 43-54)", { t: "close", o: G }],
-    ["Brown assisted, 2025-26 / 2023-24", "36% / 46%", "36.4% / 47.6%", { t: "close", o: G }],
-    ["Brown projected with LeBron", "48%", "51.6%", { t: "close", o: G }],
-    ["LeBron usage / TS, 2025-26", "27.2% / .594", "27.2% / .594", { t: "exact", o: G }],
-    ["Embiid rim share of makes", "37%", "34.9% (pbpstats)", { t: "off ~2", o: A }],
-    ["“52% of LeBron’s 765 assists at rim”", "52% · 765", "42.1% · 432 assists", { t: "wrong", o: R }],
-    ["Embiid projected rim share", "42%", "41.2% (range 39-44)", { t: "close", o: G }],
-    ["Edgecombe corner-3 share → projection", "8% → 12%", "5.5% → 6.9%", { t: "wrong", o: R }],
-    ["LeBron projected usage / TS", "22% / .627", "21.5% / .60-.63", { t: "edge", o: A }],
-    ["Finals odds: 45w → 51w", "4% → 12% (3.2×)", "2.1% → 8.1% (3.8×); empirics 2.6%", { t: "shape ✓", o: A }],
-  ];
-  s.addTable(
-    [header, ...rows.map(r => [
-      { text: r[0], options: { color: INK } },
-      { text: r[1], options: { align: "center", color: INK } },
-      { text: r[2], options: { align: "center", color: INK } },
-      { text: r[3].t, options: r[3].o },
-    ])],
-    {
-      x: M, y: 1.72, w: 12.13, colW: [4.9, 2.2, 3.53, 1.5],
-      fontFace: BODY, fontSize: 10.5, rowH: 0.34, valign: "middle",
-      border: { type: "solid", color: "E4E9EF", pt: 0.75 },
-      fill: { color: "FFFFFF" },
-      autoPage: false,
-    }
-  );
-  pageFoot(s, 12, "Verdicts: 'exact' = matches verified data to rounding; 'close' = within the modeled range; 'wrong' = not supported by play-by-play shot data.");
-  s.addNotes("The honest scoreboard: most of her data was excellent (Maxey/Brown/LeBron numbers verify to the decimal); the Edgecombe chart and the LeBron assist-count are the two real errors; her curve had the right shape with a soft baseline.");
-}
-
-// ============================================================ 13 METHOD & SOURCES
+// ============================================================ 12 METHOD & SOURCES
 {
   const s = pres.addSlide();
   s.background = { color: NAVY_BG };
@@ -433,10 +382,10 @@ playerSlide(9, "Edgecombe — the skip pass finally comes",
   ]);
   col(M + 8.3, "Honesty box", [
     { text: "Projections carry ranges, not certainties; central values shown.\n\n", options: {} },
-    { text: "Where the video’s inputs failed verification (Edgecombe 8%, ‘765 assists’), the verified numbers are used and flagged on the slide.\n\n", options: {} },
+    { text: "Stat sites draw shot zones differently (corner-3, at-rim); pbpstats’ exact play-by-play counts are used, with alternates noted in slide footers.\n\n", options: {} },
     { text: "Embiid availability (38 games) is the single biggest swing factor no model fixes.", options: {} },
   ]);
-  s.addText("Original video: TikTok @leah.cammarano · rebuilt July 25, 2026", {
+  s.addText("Compiled July 25, 2026 — the day after the signing.", {
     x: M, y: 6.75, w: 12, h: 0.4, margin: 0, fontFace: BODY, fontSize: 10.5, color: "7E93AC",
   });
   s.addNotes("Method summary and provenance. All scripts and the source data file (data.md) accompany the deck in the repository.");

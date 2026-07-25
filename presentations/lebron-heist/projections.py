@@ -45,11 +45,11 @@ if __name__ == "__main__":
 
     print("\n== 2025-26 verified baselines ==")
     mx = assisted_share(MAXEY)
-    print(f"  Maxey assisted {mx:.3f} -> unassisted {1-mx:.3f}  (video: 55% unassisted)")
+    print(f"  Maxey assisted {mx:.3f} -> unassisted {1-mx:.3f}")
     b26 = assisted_share(BROWN_2526); b24 = assisted_share(BROWN_2324)
-    print(f"  Brown assisted 25-26 {b26:.3f} | 23-24 {b24:.3f}  (video: 36% / 46%)")
-    print(f"  Embiid rim share {EMBIID['rim_fgm']/EMBIID['fgm']:.3f}  (video: 37%)")
-    print(f"  Edgecombe corner-3 share of FGM {EDGECOMBE['corner3m']/EDGECOMBE['fgm']:.3f}  (video: 8%)")
+    print(f"  Brown assisted 25-26 {b26:.3f} | 23-24 {b24:.3f}")
+    print(f"  Embiid rim share {EMBIID['rim_fgm']/EMBIID['fgm']:.3f}")
+    print(f"  Edgecombe corner-3 share of FGM {EDGECOMBE['corner3m']/EDGECOMBE['fgm']:.3f}")
 
     # ---------- Maxey projection ----------
     # Method: Maxey = incumbent primary guard becoming 1B next to LeBron.
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     g_mean = sum(guards)/len(guards)
     mx_proj_assisted = mx + g_mean
     print(f"\n  Maxey projected assisted {mx_proj_assisted:.3f} -> unassisted {1-mx_proj_assisted:.3f}"
-          f"  [guard-comp mean {g_mean:+.3f}]  (video projects 45% unassisted)")
+          f"  [guard-comp mean {g_mean:+.3f}]")
     # range: Kyrie-only (conservative) to Mo/DLo mean (aggressive)
     lo = mx + min(guards); hi = mx + max(guards)
     print(f"    range: unassisted {1-hi:.3f} (max effect) to {1-lo:.3f} (min effect)")
@@ -71,4 +71,4 @@ if __name__ == "__main__":
     all_mean = sum(alln)/len(alln)
     br_proj = b24 + all_mean/2
     print(f"  Brown projected assisted {br_proj:.3f}  [restore {b24:.3f} + ½·{all_mean:+.3f}]"
-          f"  (video projects 48%)")
+          "")
