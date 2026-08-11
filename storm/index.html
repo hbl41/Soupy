@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quad Cities Storm Watch</title>
+    <meta
+      name="description"
+      content="Live severe-storm tracker for the Quad Cities — radar, NWS warnings with distance and ETA, SPC outlook, and a four-model wind-gust consensus."
+    />
+    <!-- Leaflet is vendored locally so the tracker keeps working even if the
+         CDN is unreachable mid-storm. -->
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="storm.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">⛈️</span>
+        <div>
+          <h1>Quad Cities Storm Watch</h1>
+          <p class="subtitle">Derecho / severe-storm tracker · Davenport–Moline</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span id="status" class="status">Starting…</span>
+        <span id="countdown" class="countdown"></span>
+        <button id="notify-btn" class="btn btn-ghost" title="Browser alerts for new watches/warnings">🔔 Alerts</button>
+        <button id="refresh-btn" class="btn" title="Refresh now">↻ Refresh</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div id="threat-banner" class="threat-banner">
+          <div class="threat-main">
+            <div id="threat-level" class="threat-level">…</div>
+            <div id="threat-blurb" class="threat-blurb">Assessing…</div>
+          </div>
+          <div id="threat-detail" class="threat-detail"></div>
+        </div>
+
+        <div class="card">
+          <h2>Why this level</h2>
+          <ul id="threat-reasons" class="reasons"></ul>
+        </div>
+
+        <div class="card">
+          <h2>Active watches &amp; warnings <span id="alert-area" class="dim"></span></h2>
+          <div id="alerts-panel">Loading…</div>
+        </div>
+
+        <div class="card">
+          <h2>Wind-gust consensus <span class="dim">(HRRR · GFS · ICON · GEM, mph)</span></h2>
+          <p class="hint">
+            Four independent models, one row per hour. Wide spread = models
+            disagree — trust the range, not one number.
+          </p>
+          <div id="consensus-panel">Loading…</div>
+        </div>
+
+        <div class="card">
+          <h2>NWS hourly forecast</h2>
+          <div id="hourly-panel">Loading…</div>
+        </div>
+
+        <div class="card">
+          <h2>Sources</h2>
+          <ul id="sources-panel" class="sources"></ul>
+          <p class="hint">
+            Official warnings &amp; radar:
+            <a href="https://www.weather.gov/dvn/" target="_blank" rel="noopener">NWS Quad Cities</a> ·
+            <a href="https://www.spc.noaa.gov/" target="_blank" rel="noopener">SPC</a> ·
+            <a href="https://radar.weather.gov/" target="_blank" rel="noopener">NWS radar</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="mapwrap">
+        <div id="map"></div>
+        <div class="maplegend">
+          <label class="radarline">
+            <input type="checkbox" id="radar-animate" checked /> animate radar (last 25 min)
+          </label>
+          <span class="key key-tor">Tornado Warning</span>
+          <span class="key key-svr">Severe T-storm Warning</span>
+          <span class="key key-flood">Flood</span>
+          <span class="key key-spc">SPC outlook</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="storm.js"></script>
+  </body>
+</html>
